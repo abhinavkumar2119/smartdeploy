@@ -1,27 +1,24 @@
-from flask import Flask, request, jsonify
-import logging
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-logging.basicConfig(level=logging.INFO)
+
 
 @app.route('/')
-def index():
-    return jsonify(message="SmartDeploy App is running")
+def home():
+    return "SmartDeploy App Running!"
 
-@app.route('/health')
-def health():
-    return jsonify(status="OK"), 200
 
-@app.route('/predict', methods=['POST'])
-def predict():
+@app.route('/add', methods=['POST'])
+def add():
     data = request.get_json()
-    value = data.get("input")
-    if value is None:
-        logging.warning("No input provided")
-        return jsonify(error="Missing input"), 400
-    result = value * 2
-    logging.info(f"Input: {value}, Result: {result}")
-    return jsonify(result=result)
+    result = data['a'] + data['b']
+    return jsonify({'result': result})
+
+
+@app.route('/ping')
+def ping():
+    return jsonify({'status': 'ok'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

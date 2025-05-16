@@ -1,23 +1,29 @@
-import app
+import pytest
+from app import app
 
-def test_home():
-    client = app.app.test_client()
+
+@pytest.fixture
+def client():
+    app.testing = True
+    with app.test_client() as client:
+        yield client
+
+
+def test_home(client):
     response = client.get('/')
     assert response.status_code == 200
+    assert b"SmartDeploy App Running!" in response.data
 
-def test_health():
-    client = app.app.test_client()
-    response = client.get('/health')
+
+def test_add(client):
+    response = client.post('/add', json={'a': 2, 'b': 3})
+    json_data = response.get_json()
     assert response.status_code == 200
-    assert response.json['status'] == "OK"
+    assert json_data['result'] == 5
 
-def test_predict_valid():
-    client = app.app.test_client()
-    response = client.post('/predict', json={'input': 3})
+
+def test_ping(client):
+    response = client.get('/ping')
+    json_data = response.get_json()
     assert response.status_code == 200
-    assert response.json['result'] == 6
-
-def test_predict_invalid():
-    client = app.app.test_client()
-    response = client.post('/predict', json={})
-    assert response.status_code == 400
+    assert json_data['status'] == 'ok'
