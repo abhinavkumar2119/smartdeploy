@@ -7,16 +7,19 @@ logging.basicConfig(level=logging.INFO)
 @app.route('/')
 
 
+
 def index():
     return jsonify(message="SmartDeploy App is running")
 
 @app.route('/health')
 
 
+
 def health():
     return jsonify(status="OK"), 200
 
 @app.route('/predict', methods=['POST'])
+
 
 
 def predict():
