@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 OWNER = "abhinavkumar2119"
 REPO = "smartdeploy"
-TOKEN = "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"  # Replace this with your token
+TOKEN = ""  # Replace this with the token
 
 HEADERS = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
 API_URL = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/runs"
