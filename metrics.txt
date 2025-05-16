@@ -1,0 +1,16 @@
+# DevOps Automation Metrics
+
+Deployment Frequency: 3 times/day (based on commit history)
+Lead Time for Changes: 2 minutes (time for GitHub Actions to finish tests)
+Change Failure Rate: 0% (all recent runs passed)
+Mean Time to Recovery (MTTR): ~5 minutes (estimated time to fix issues and push fixes)
+Build Time: 1 minute 30 seconds (average GitHub Actions runtime)
+
+# Before Automation
+Manual Build Time: 5 minutes (typical manual build and test time)
+Manual Deployment Time: 5 minutes (manual process to deploy)
+Error Tracking: Manual and slow
+
+# After Automation
+Automated CI/CD with GitHub Actions
+Fast build, clear logs, quick recovery
